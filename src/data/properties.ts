@@ -4,6 +4,12 @@ export interface Expense {
   color: string
 }
 
+export interface Scores {
+  ltr: number
+  str: number
+  flip: number
+}
+
 export interface Property {
   id: string
   name: string
@@ -23,7 +29,44 @@ export interface Property {
   appreciation: number
   monthlyIncomeHistory: number[]
   expenses: Expense[]
-  trend: number // monthly % change
+  trend: number
+  // New fields
+  scores: Scores
+  primaryStrategy: 'LTR' | 'STR' | 'FLIP'
+  primaryScore: number
+  status: 'Off Market' | 'For Sale' | 'Foreclosure' | 'Under Contract' | 'For Rent'
+  beds: number
+  baths: number
+  sqft: number
+  ownerOccupied: boolean
+}
+
+export interface DiscoveryProperty {
+  id: string
+  name: string
+  address: string
+  city: string
+  state: string
+  zip: string
+  price: number
+  status: 'For Sale' | 'Foreclosure' | 'Off Market'
+  beds: number
+  baths: number
+  sqft: number
+  image: string
+  scores: Scores
+  primaryStrategy: 'LTR' | 'STR' | 'FLIP'
+  primaryScore: number
+  ownerOccupied: boolean
+}
+
+export interface MarketAlert {
+  id: number
+  type: 'listing' | 'price' | 'legislative' | 'score' | 'grandcru'
+  title: string
+  description: string
+  time: string
+  thumbnail?: string
 }
 
 export const MONTHS = ['Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec', 'Jan', 'Feb', 'Mar']
@@ -55,6 +98,14 @@ export const properties: Property[] = [
       { label: 'Management', value: 820, color: '#D4CFC6' },
     ],
     trend: 2.1,
+    scores: { ltr: 88, str: 72, flip: 45 },
+    primaryStrategy: 'LTR',
+    primaryScore: 88,
+    status: 'Off Market',
+    beds: 16,
+    baths: 8,
+    sqft: 6200,
+    ownerOccupied: false,
   },
   {
     id: 'larchmont',
@@ -82,6 +133,14 @@ export const properties: Property[] = [
       { label: 'Management', value: 1480, color: '#D4CFC6' },
     ],
     trend: 0.8,
+    scores: { ltr: 82, str: 78, flip: 38 },
+    primaryStrategy: 'LTR',
+    primaryScore: 82,
+    status: 'Off Market',
+    beds: 24,
+    baths: 12,
+    sqft: 9800,
+    ownerOccupied: false,
   },
   {
     id: 'venice',
@@ -109,6 +168,14 @@ export const properties: Property[] = [
       { label: 'Management', value: 340, color: '#D4CFC6' },
     ],
     trend: -0.3,
+    scores: { ltr: 71, str: 84, flip: 62 },
+    primaryStrategy: 'STR',
+    primaryScore: 84,
+    status: 'Off Market',
+    beds: 3,
+    baths: 2,
+    sqft: 1450,
+    ownerOccupied: false,
   },
   {
     id: 'silverlake',
@@ -136,6 +203,14 @@ export const properties: Property[] = [
       { label: 'Management', value: 560, color: '#D4CFC6' },
     ],
     trend: 1.4,
+    scores: { ltr: 85, str: 69, flip: 51 },
+    primaryStrategy: 'LTR',
+    primaryScore: 85,
+    status: 'Off Market',
+    beds: 8,
+    baths: 4,
+    sqft: 3200,
+    ownerOccupied: false,
   },
   {
     id: 'marvista',
@@ -163,6 +238,14 @@ export const properties: Property[] = [
       { label: 'Management', value: 410, color: '#D4CFC6' },
     ],
     trend: -2.8,
+    scores: { ltr: 74, str: 81, flip: 58 },
+    primaryStrategy: 'STR',
+    primaryScore: 81,
+    status: 'Off Market',
+    beds: 4,
+    baths: 2,
+    sqft: 1800,
+    ownerOccupied: false,
   },
   {
     id: 'logansquare',
@@ -190,6 +273,14 @@ export const properties: Property[] = [
       { label: 'Management', value: 420, color: '#D4CFC6' },
     ],
     trend: 0.5,
+    scores: { ltr: 79, str: 55, flip: 72 },
+    primaryStrategy: 'LTR',
+    primaryScore: 79,
+    status: 'Off Market',
+    beds: 12,
+    baths: 6,
+    sqft: 4800,
+    ownerOccupied: false,
   },
   {
     id: 'pilsen',
@@ -217,6 +308,14 @@ export const properties: Property[] = [
       { label: 'Management', value: 280, color: '#D4CFC6' },
     ],
     trend: 1.2,
+    scores: { ltr: 76, str: 48, flip: 82 },
+    primaryStrategy: 'FLIP',
+    primaryScore: 82,
+    status: 'Off Market',
+    beds: 8,
+    baths: 4,
+    sqft: 3100,
+    ownerOccupied: false,
   },
   {
     id: 'hydepark',
@@ -244,6 +343,14 @@ export const properties: Property[] = [
       { label: 'Management', value: 190, color: '#D4CFC6' },
     ],
     trend: 0.2,
+    scores: { ltr: 73, str: 42, flip: 68 },
+    primaryStrategy: 'LTR',
+    primaryScore: 73,
+    status: 'Off Market',
+    beds: 3,
+    baths: 1,
+    sqft: 1200,
+    ownerOccupied: false,
   },
   {
     id: 'scottsdale',
@@ -271,6 +378,14 @@ export const properties: Property[] = [
       { label: 'Management', value: 260, color: '#D4CFC6' },
     ],
     trend: 1.8,
+    scores: { ltr: 69, str: 87, flip: 55 },
+    primaryStrategy: 'STR',
+    primaryScore: 87,
+    status: 'Off Market',
+    beds: 4,
+    baths: 3,
+    sqft: 2100,
+    ownerOccupied: false,
   },
   {
     id: 'tempe',
@@ -298,6 +413,164 @@ export const properties: Property[] = [
       { label: 'Management', value: 280, color: '#D4CFC6' },
     ],
     trend: 3.2,
+    scores: { ltr: 83, str: 76, flip: 71 },
+    primaryStrategy: 'LTR',
+    primaryScore: 83,
+    status: 'Off Market',
+    beds: 6,
+    baths: 3,
+    sqft: 2400,
+    ownerOccupied: false,
+  },
+]
+
+export const discoveryListings: DiscoveryProperty[] = [
+  {
+    id: 'echo-park',
+    name: '1420 Echo Park Ave',
+    address: '1420 Echo Park Ave',
+    city: 'Los Angeles',
+    state: 'CA',
+    zip: '90026',
+    price: 520000,
+    status: 'For Sale',
+    beds: 3,
+    baths: 2,
+    sqft: 1380,
+    image: 'https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=800&h=600&fit=crop',
+    scores: { ltr: 76, str: 82, flip: 54 },
+    primaryStrategy: 'STR',
+    primaryScore: 82,
+    ownerOccupied: false,
+  },
+  {
+    id: 'majestic-dr',
+    name: '5008 Majestic Dr',
+    address: '5008 Majestic Dr',
+    city: 'Austin',
+    state: 'TX',
+    zip: '78723',
+    price: 479000,
+    status: 'Off Market',
+    beds: 3,
+    baths: 2,
+    sqft: 1450,
+    image: 'https://images.unsplash.com/photo-1583608205776-bfd35f0d9f83?w=800&h=600&fit=crop',
+    scores: { ltr: 68, str: 91, flip: 62 },
+    primaryStrategy: 'STR',
+    primaryScore: 91,
+    ownerOccupied: false,
+  },
+  {
+    id: 'portage-cv',
+    name: '8503 Portage Cv, Unit 3',
+    address: '8503 Portage Cv #3',
+    city: 'Austin',
+    state: 'TX',
+    zip: '78759',
+    price: 485000,
+    status: 'For Sale',
+    beds: 4,
+    baths: 2,
+    sqft: 1312,
+    image: 'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=800&h=600&fit=crop',
+    scores: { ltr: 78, str: 65, flip: 35 },
+    primaryStrategy: 'LTR',
+    primaryScore: 78,
+    ownerOccupied: false,
+  },
+  {
+    id: 'giles-st',
+    name: '1701 Giles St',
+    address: '1701 Giles St',
+    city: 'Austin',
+    state: 'TX',
+    zip: '78702',
+    price: 499000,
+    status: 'Foreclosure',
+    beds: 3,
+    baths: 1,
+    sqft: 1280,
+    image: 'https://images.unsplash.com/photo-1576941089067-2de3c901e126?w=800&h=600&fit=crop',
+    scores: { ltr: 92, str: 65, flip: 71 },
+    primaryStrategy: 'LTR',
+    primaryScore: 92,
+    ownerOccupied: false,
+  },
+  {
+    id: 'sycamore-ave',
+    name: '213 Sycamore Ave',
+    address: '213 Sycamore Ave',
+    city: 'Pasadena',
+    state: 'CA',
+    zip: '91103',
+    price: 589000,
+    status: 'For Sale',
+    beds: 2,
+    baths: 2,
+    sqft: 1300,
+    image: 'https://images.unsplash.com/photo-1480074568708-e7b720bb3f09?w=800&h=600&fit=crop',
+    scores: { ltr: 67, str: 89, flip: 55 },
+    primaryStrategy: 'STR',
+    primaryScore: 89,
+    ownerOccupied: false,
+  },
+  {
+    id: 'kedzie-chicago',
+    name: '4421 N Kedzie Ave',
+    address: '4421 N Kedzie Ave',
+    city: 'Chicago',
+    state: 'IL',
+    zip: '60625',
+    price: 340000,
+    status: 'Foreclosure',
+    beds: 6,
+    baths: 3,
+    sqft: 2800,
+    image: 'https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=800&h=600&fit=crop',
+    scores: { ltr: 85, str: 48, flip: 78 },
+    primaryStrategy: 'LTR',
+    primaryScore: 85,
+    ownerOccupied: false,
+  },
+]
+
+export const marketAlerts: MarketAlert[] = [
+  {
+    id: 1,
+    type: 'listing',
+    title: 'New listing matches your criteria',
+    description: '1420 Echo Park Ave, Los Angeles — $520K · 3 Bd · STR Score 82',
+    time: '2h ago',
+    thumbnail: 'https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=120&h=90&fit=crop',
+  },
+  {
+    id: 2,
+    type: 'price',
+    title: 'Price drop detected',
+    description: '834 Venice Blvd area comp dropped 4.2% — may affect STR score',
+    time: '6h ago',
+  },
+  {
+    id: 3,
+    type: 'legislative',
+    title: 'Legislative update',
+    description: 'LA rent control ordinance proposed for Zone R3 — affects 3 of your properties',
+    time: '1d ago',
+  },
+  {
+    id: 4,
+    type: 'score',
+    title: 'Score change — Scottsdale Ranch',
+    description: 'STR score upgraded to 87 (was 81) following new zoning data',
+    time: '2d ago',
+  },
+  {
+    id: 5,
+    type: 'grandcru',
+    title: '3 Grand Cru deals near your LA properties',
+    description: 'Foreclosure in Echo Park scores 92 LTR — highest in your watch area',
+    time: '3d ago',
   },
 ]
 
@@ -314,13 +587,6 @@ export const portfolioHistory = [
   { month: 'Jan', value: 4100000 },
   { month: 'Feb', value: 4160000 },
   { month: 'Mar', value: 4220000 },
-]
-
-export const recentActivity = [
-  { id: 1, text: 'Rent collected', property: '1247 S Normandie Ave', time: '2h ago', icon: 'payment' },
-  { id: 2, text: 'Lease renewed', property: 'Unit 4B, Larchmont Courtyard', time: '1d ago', icon: 'lease' },
-  { id: 3, text: 'Maintenance request resolved', property: 'Pilsen Walk-up', time: '2d ago', icon: 'maintenance' },
-  { id: 4, text: 'Rent collected', property: 'Tempe Triplex', time: '3d ago', icon: 'payment' },
 ]
 
 export function formatCurrency(val: number, compact = false): string {
@@ -345,4 +611,8 @@ export function getAvgCapRate(): number {
 
 export function getAvgOccupancy(): number {
   return Math.round(properties.reduce((sum, p) => sum + p.occupancy, 0) / properties.length)
+}
+
+export function getPortfolioTerroirScore(): number {
+  return Math.round(properties.reduce((sum, p) => sum + p.primaryScore, 0) / properties.length)
 }
