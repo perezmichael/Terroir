@@ -1,0 +1,94 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html, body, #root {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+body {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  background-color: #F8F5F0;
+  color: #1E1C19;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.mono {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* Custom scrollbar for WebKit */
+::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
+}
+
+/* Smooth scroll */
+.scroll-container {
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+}
+
+/* Tab screen transitions */
+.screen-enter {
+  opacity: 0;
+  transform: translateX(20px);
+}
+.screen-enter-active {
+  opacity: 1;
+  transform: translateX(0);
+  transition: opacity 250ms ease, transform 250ms ease;
+}
+
+/* Detail slide-in animation */
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideOutRight {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+.slide-in {
+  animation: slideInRight 280ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* Active press state for cards */
+.card-pressable {
+  cursor: pointer;
+  transition: transform 120ms ease, opacity 120ms ease;
+}
+
+.card-pressable:active {
+  transform: scale(0.98);
+  opacity: 0.92;
+}
+
+/* Recharts overrides */
+.recharts-surface {
+  overflow: visible;
+}
