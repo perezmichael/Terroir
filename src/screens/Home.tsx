@@ -88,7 +88,7 @@ export default function Home() {
           <div>
             <p style={{ fontSize: '13px', color: colors.basalt, fontFamily: fonts.ui, marginBottom: '2px' }}>Good morning,</p>
             <h1 style={{ fontSize: '24px', fontFamily: fonts.ui, fontWeight: 700, color: colors.vineyardDark, lineHeight: 1.2 }}>
-              Michael
+              Shiraz
             </h1>
           </div>
           <div
@@ -98,7 +98,7 @@ export default function Home() {
               display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0,
             }}
           >
-            <span style={{ color: '#F8F5F0', fontFamily: fonts.ui, fontWeight: 700, fontSize: '16px' }}>M</span>
+            <span style={{ color: '#F8F5F0', fontFamily: fonts.ui, fontWeight: 700, fontSize: '16px' }}>S</span>
           </div>
         </div>
 
