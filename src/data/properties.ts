@@ -473,7 +473,7 @@ export const discoveryListings: DiscoveryProperty[] = [
     beds: 4,
     baths: 2,
     sqft: 1312,
-    image: 'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=800&h=600&fit=crop',
+    image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&h=600&fit=crop',
     scores: { ltr: 78, str: 65, flip: 35 },
     primaryStrategy: 'LTR',
     primaryScore: 78,
